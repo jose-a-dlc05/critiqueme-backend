@@ -1,10 +1,15 @@
 import "./lib/env";
 import express from "express";
+import morgan from "morgan";
 
 const app = express();
 
+// Dev logging middleware
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
+
 const PORT = process.env.PORT || 3000;
-console.log(process.env.NODE_ENV);
 
 app.listen(PORT, () => {
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
